@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfnusnn46c48d"]
+[gd_scene load_steps=10 format=3 uid="uid://dfnusnn46c48d"]
 
 [ext_resource type="Texture2D" uid="uid://skkj503hd4v0" path="res://assets/all black.jpg" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://bi1ictxiuss7a" path="res://scripts/bottom.gd" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://7u7aax73g503" path="res://scenes/paddle.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://yp0b4b1716sd" path="res://scenes/ball.tscn" id="4_jyhfs"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jyhfs"]
+friction = 0.0
+bounce = 1.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_o5qli"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tbgi4"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tefeu"]
+friction = 0.0
+bounce = 1.0
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_o5qli"]
 
@@ -21,6 +34,7 @@ texture = ExtResource("1_o5qli")
 
 [node name="left" type="StaticBody2D" parent="barriers"]
 position = Vector2(-577, 0)
+physics_material_override = SubResource("PhysicsMaterial_jyhfs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="barriers/left"]
 rotation = 1.5707964
@@ -28,6 +42,7 @@ shape = SubResource("WorldBoundaryShape2D_o5qli")
 
 [node name="right" type="StaticBody2D" parent="barriers"]
 position = Vector2(577, 0)
+physics_material_override = SubResource("PhysicsMaterial_tbgi4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="barriers/right"]
 rotation = -1.5707964
@@ -35,6 +50,7 @@ shape = SubResource("WorldBoundaryShape2D_o5qli")
 
 [node name="top" type="StaticBody2D" parent="barriers"]
 position = Vector2(0, -325)
+physics_material_override = SubResource("PhysicsMaterial_tefeu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="barriers/top"]
 rotation = 3.1415927
@@ -49,7 +65,9 @@ scale = Vector2(400, 1)
 shape = SubResource("SegmentShape2D_o5qli")
 
 [node name="player" parent="." instance=ExtResource("3_sugp2")]
-position = Vector2(0, 335)
+position = Vector2(0, 200)
+
+[node name="ball" parent="." instance=ExtResource("4_jyhfs")]
 
 [connection signal="area_entered" from="barriers/bottom" to="barriers/bottom" method="_on_area_entered"]
 [connection signal="body_entered" from="barriers/bottom" to="barriers/bottom" method="_on_body_entered"]

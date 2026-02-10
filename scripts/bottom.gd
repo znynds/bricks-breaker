@@ -14,5 +14,6 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "ball":
 		print("小球掉落")
-		#待补充，小球脚本未写
+		
+		#待补充，小球脚本未写,重置逻辑应集合到game manager脚本内
 	pass # Replace with function body.
